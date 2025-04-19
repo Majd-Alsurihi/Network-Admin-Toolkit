@@ -16,10 +16,12 @@ REM Prompt user for input
 set /p newIP=Enter new IP address:
 set /p subnetMask=Enter Subnet Mask (e.g., 255.255.255.0):
 set /p gateway=Enter Default Gateway:
+set /p dns=Enter Preferred DNS Server:
 
 REM Apply the new static IP configuration
 echo Setting static IP configuration...
 netsh interface ip set address name=%adapterName% static %newIP% %subnetMask% %gateway%
+netsh interface ip set dns name=%adapterName% static %dns% primary
 
 REM Display the updated configuration
 echo.
@@ -27,5 +29,5 @@ echo Updated IP Configuration:
 netsh interface ip show config name=%adapterName%
 
 echo.
-echo Static IP address has been set.
+echo Static IP address and DNS have been set.
 pause
